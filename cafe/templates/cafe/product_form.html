@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add / Edit Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #f8f9fa; 
+      }
+    </style>
+</head>
+<body class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+
+    <div class="col-md-6">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success text-center" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title mb-4 text-center">{{ form.instance.pk|yesno:"Edit Product,Add New Product" }}</h2>
+
+          <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary me-2">Save</button>
+                <a href="{% url 'product_list' %}" class="btn btn-secondary">Back</a>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

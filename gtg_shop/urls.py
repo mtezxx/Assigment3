@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from cafe.views import product_list, place_order, product_create, product_update, product_delete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', product_list, name='product_list'),
+    path('order/', place_order, name='place_order'),
+    path('product/create/', product_create, name='product_create'),
+    path('product/<int:pk>/edit/', product_update, name='product_update'),
+    path('product/<int:pk>/delete/', product_delete, name='product_delete'),
 ]
