@@ -1,27 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta charset="UTF-8">
     <title>Delete Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f6f9fc, #e5ebf5);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card {
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 1s ease-in;
+        }
+        .btn {
+            border-radius: 2rem;
+            padding: 0.5rem 1.5rem;
+            transition: 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+    </style>
 </head>
 <body>
-    
-    {% if messages %}
-    {% for message in messages %}
-        <div style="padding:10px; background-color:#d4edda; border:1px solid #c3e6cb; margin-bottom:10px;">
-        {{ message }}
-        </div>
-    {% endfor %}
-    {% endif %}
 
-    <h1>Are you sure you want to delete "{{ product.name }}"?</h1>
+    <div class="col-md-6">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success text-center" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-    </form>
+      <div class="card shadow-lg text-center">
+          <h2 class="mb-4 fw-bold">Delete Product</h2>
+          <p class="lead">Are you sure you want to delete <strong>"{{ product.name }}"</strong>?</p>
 
-    <a href="{% url 'product_list' %}">Cancel</a>
+          <form method="post" class="d-flex flex-column gap-3 mt-4">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Yes, Delete</button>
+              <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancel</a>
+          </form>
+      </div>
+    </div>
+
 </body>
 </html>
